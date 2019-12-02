@@ -229,6 +229,376 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/02/EOS/BOS Oracle/BOS Oracle 2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/02/EOS/BOS Oracle/BOS Oracle 2/" itemprop="url">BOS Oracle（二）用正向激励的方式提供可信数据</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-02T15:00:31+08:00">
+                2019-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/预言机/" itemprop="url" rel="index">
+                    <span itemprop="name">预言机</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>BOS 的预言机（Oracle）希望能够作为区块链与现实世界的数据桥梁。</p>
+<p>中心化预言机服务的设计是基于<strong>可信数据源或者权威数据源</strong>这一假设，这样的假设从理论上来说有很大风险，无法保证这种数据源提供数据的真实性。</p>
+<p>BOS 的预言机系统从构建之初所遵循的原则就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">不依赖于每一个预言机数据提供者一定会提供真实数据，而是承认其不足进而将其作为博弈的参与方加入到系统中来，以期在博弈中达到整体可信。</span><br></pre></td></tr></table></figure>
+<p>BOS 预言机将会使得区块链的价值从其货币属性延伸到了<strong>交易和规则</strong>的构建上，这种延伸将会解决或改进许多现实世界的信任问题，从而扩大区块链的应用边界，并最终让区块链技术可以在交易转账以外场景落地。</p>
+<h1 id="参与者博弈完备"><a href="#参与者博弈完备" class="headerlink" title="参与者博弈完备"></a>参与者博弈完备</h1><p><strong>数据提供方：</strong>提供数据，从数据使用者中获取收益，需要抵押押金作为风控的基础</p>
+<p><strong>数据使用者：</strong>和提供方约定收益，按照约定支付费用</p>
+<p><strong>预言机合约：</strong>用于记录数据提供方和使用者所约定的协议，并提供数据处理和穿透。</p>
+<p><strong>仲裁员：</strong>当数据提供方和数据使用者出现争议和提出申诉时，多轮多个仲裁员参与决策，注册并且需要boswps.io竞选，需要抵押押金作为风控的基础</p>
+<p>系统会对最终判定的作恶者进行惩罚。整个系统会形成“数据提供者”、“数据使用者”、“仲裁员”三方的博弈平衡，而整个博弈过程和规则制定可以保证公正是极大概率的事件。</p>
+<h1 id="正向激励模型"><a href="#正向激励模型" class="headerlink" title="正向激励模型"></a>正向激励模型</h1><p><strong>场景一：</strong></p>
+<p>\1.    DApp方为了给用户提供可信数据并作出判断，获取问题需求注册服务，并给该服务所需的价格，和所需的抵押金。</p>
+<p>\2.  数据提供方提供稳定可靠的服务，使用抵押金作为保证，收取高昂的费用作为维护成本，并提供收益。</p>
+<p><strong>场景二：</strong></p>
+<p>DApp方提供体育比赛数据，但为了证明DApp方自身不会作假，自身作为提供者和<strong>同时作为使用者</strong>进行注册，当DApp用户有举报问题时进行扣款和抵押。</p>
+<p>总之系统的规则对于理性的参与者来说是静态的可预见的，因而诚实公正地进行参与才是其优势策略，对于非理性的参与者系统也能够以极大概率予以惩罚，从而使得整个预言机服务将会正向、健康、高效的运行。</p>
+<p>下面我们列出四种通过正向激励，将数据通过可信方式进行数据通信：</p>
+<h1 id="1-直接写入数据库"><a href="#1-直接写入数据库" class="headerlink" title="1. 直接写入数据库"></a>1. 直接写入数据库</h1><p><img src="/2019/12/02/EOS/BOS Oracle/BOS Oracle 2/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
+<h4 id="数据提者先行写入数据到链上，使用者读取"><a href="#数据提者先行写入数据到链上，使用者读取" class="headerlink" title="数据提者先行写入数据到链上，使用者读取"></a>数据提者先行写入数据到链上，使用者读取</h4><p><strong>应用场景：</strong></p>
+<p>比较适应非标准化的服务，包括特殊证据格式的服务，预言机合约不方便进行穿透的场景</p>
+<p><strong>服务特点：</strong></p>
+<p>标准化服务，服务便于注册，以确定性数据和常规化的非确定性数据为主，在提供方pushdata的过程中，经过oracle穿透，对使用和消费双方简单方便</p>
+<h1 id="2-监听-穿透oracle合约推送"><a href="#2-监听-穿透oracle合约推送" class="headerlink" title="2. 监听+穿透oracle合约推送"></a>2. 监听+穿透oracle合约推送</h1><p><img src="https://mmbiz.qpic.cn/mmbiz_png/ic36Rayaict54e6DpdhkDfPsAHKq2zUiaV8nF3GUgEibicepu4lGsZneSq02JuvR1xChK66bRT10CeLAicIUqZL0m4SQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<h4 id="监听调用事件，链上主动推送数据到使用者"><a href="#监听调用事件，链上主动推送数据到使用者" class="headerlink" title="监听调用事件，链上主动推送数据到使用者"></a>监听调用事件，链上主动推送数据到使用者</h4><p><strong>应用场景：</strong></p>
+<p>比较适应非标准化的服务，包括特殊证据格式的服务，预言机合约不方便进行穿透的场景</p>
+<p><strong>服务特点：</strong></p>
+<p>标准化服务，服务便于注册，以确定性数据和常规化的非确定性数据为主，在提供方pushdata的过程中，经过oracle穿透，对使用和消费双方简单方便</p>
+<h1 id="3-监听-直接推送DApp合约"><a href="#3-监听-直接推送DApp合约" class="headerlink" title="3. 监听+直接推送DApp合约"></a>3. 监听+直接推送DApp合约</h1><p><img src="https://mmbiz.qpic.cn/mmbiz_png/ic36Rayaict54e6DpdhkDfPsAHKq2zUiaV8mXs7th2KUaBYydghlKRnNbEm0BMC46LVckv3SHdUUhCzSrBkZpO9lw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<h4 id="监听调用事件，链下主动推送给数据使用者"><a href="#监听调用事件，链下主动推送给数据使用者" class="headerlink" title="监听调用事件，链下主动推送给数据使用者"></a>监<strong>听调</strong>用事件，链下主动推送给数据使用者</h4><p>在触发阈值逻辑时，经过预言机合约，将发送有效ACTION和用户交互</p>
+<p><strong>应用场景：</strong></p>
+<p>比较适应非标准化的服务，包括特殊证据格式的服务，预言机合约不方便进行穿透的场景</p>
+<p><strong>服务特点：</strong></p>
+<p>可高度定制化，但需提供方和DApp方进行约定，不经过预言机合约</p>
+<h1 id="4-链下签名交互数据-链上风控博弈"><a href="#4-链下签名交互数据-链上风控博弈" class="headerlink" title="4. 链下签名交互数据+链上风控博弈"></a>4. 链下签名交互数据+链上风控博弈</h1><p>预言机不再监听数据交易和请求，数据提供方和消费者</p>
+<ol>
+<li><p>提前在预言机合约签订交互协议，包括进行仲裁和抵押</p>
+</li>
+<li><p>在链下进行签名，<strong>签名确认</strong>数据提供者发出信息，<strong>确认</strong>数据接受者收到信息</p>
+</li>
+<li><p>在链下进行数据的提供和消费</p>
+</li>
+<li><p>但当触发转账或有效ACTION时通过触发oracle合约的风控机制进行操作</p>
+</li>
+<li><p>当出现纷争时，双方即可根据在Oracle约定好的风控规则，即向oracle.bos合约发起仲裁</p>
+</li>
+</ol>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/ic36Rayaict54e6DpdhkDfPsAHKq2zUiaV8Yh6L0InLoUKBZkic87gbrCzvx2mZFunsj5dicB8m2icJEj2ibwSolFcOGg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<p><strong>应用场景：</strong></p>
+<p>数据量非常大，更新太频繁了，链上太复杂，例如深度学习的训练，数据集和，数据无需上链，但通过签名进行数据记录。</p>
+<p><strong>特点：</strong></p>
+<p>可高度定制化，但需提供方和DApp方进行约定，数据交互直接在数据</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>四种不同的数据提供方式，适应不同的场景，现实世界数据具有的<strong>复杂性、不规整性、零散性以及隐私性</strong>。从公开可方便获取的数据（比如天气）到有限制的数据（比如个人征信）都可以成为 BOS 的预言机服务。任何可以被描述并在一定意义上可以被鉴别的数据服务都可通过 BOS 预言机的来提供服务。</p>
+<p>后面我们将展开关于博弈和制约，抵押模型和Demo展示预言机的功能的文章和大家交流讨论。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/02/EOS/BOS Oracle/BOS Oracle 1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/02/EOS/BOS Oracle/BOS Oracle 1/" itemprop="url">BOS Oracle (一) 解决区块链落地发展的困局</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-02T15:00:31+08:00">
+                2019-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/预言机/" itemprop="url" rel="index">
+                    <span itemprop="name">预言机</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="预言机是什么"><a href="#预言机是什么" class="headerlink" title="预言机是什么"></a>预言机是什么</h1><p>徐忠博士在央行金融研究所发布的论文：<a href="http://www.chinamfi.net/upload/link/1811/f084866.pdf" target="_blank" rel="noopener">《区块链能做什么、不能做什么?》</a>：</p>
+<p>区块链外信息写入区块链内的机制，一般被称为预言机 (oracle mechanism)</p>
+<p>简而言之，预言机就是区块链与现实世界进行数据交互的桥梁。</p>
+<p>DAPP如果是App的话，预言机就是媒介让数据可信的方式做到App和现实世界的沟通，笔者会用三期和大家分享技术和应用的心得：</p>
+<p>为什么需要渠道可信？</p>
+<p>如何保障这个数据渠道的<strong>可信</strong>？</p>
+<p>可信数据渠道如何应用？</p>
+<h1 id="预言机是的用途"><a href="#预言机是的用途" class="headerlink" title="预言机是的用途"></a>预言机是的用途</h1><p>DAPP如果是App的话，预言机就是媒介让数据可信的方式做到App和现实世界的沟通，在大数据保险，体育竞猜，和去中心化金融等方面的大规模落地等都会有广阔需求。</p>
+<h2 id="大数据和保险保险"><a href="#大数据和保险保险" class="headerlink" title="大数据和保险保险"></a><strong>大数据和保险保险</strong></h2><p>在现行的保险理赔过程中，常出现拒赔概率高的情况。规则的制定和赔付的执行主要由保险公司制定，颁布和修改，缺乏保证第三方来保证公平性。加之，赔付时保险公司占据的强势地位，以及一些不可避免的主观因素。导致的“投保容易，理赔难”。 利用区块链的大数据保险势在必行，通过区块链智能合约，提高核保进程、管理效率并且能够自动赔付，有效减少保险公司不合规拒赔/拒偿的操作空间和机会， 重塑保险公司和消费者的信任。如何让claim信息高效，准确传递给合约，及时发放insurance premium。</p>
+<h2 id="体育和电竞竞猜行业"><a href="#体育和电竞竞猜行业" class="headerlink" title="体育和电竞竞猜行业"></a><strong>体育和电竞竞猜行业</strong></h2><p>Sports betting currently accounts for upwards of <strong>40% of global gambling revenue</strong>around the world, which is <strong>more than any other section</strong> (inclusive of lotteries, casinos, poker, and other forms of gaming.). the CAGR (Compounded Annual Growth Rate) is expected to increase by a whopping 8.62% from 2018-2022.</p>
+<p>在2018年到2022年之间，体育竞猜会有8.62%的增长</p>
+<p>对于电竞行业来说，每年的增长率为13.5%，预计在2020年会达到129百亿美金</p>
+<p><a href="https://www.scmp.com/sport/other-sport/article/2182341/e-sports-online-betting-hit-us129-billion-2020-fastest-growing" target="_blank" rel="noopener">South China Morning Post E-sports online betting to hit US$12.9 billion in 2020 – fastest-growing trend in global sports gambling, says research report</a></p>
+<p>体育竞猜行业的结果需要通过可信的方式，触发智能合约，发起ACTION，如何保证比赛结果，真实有效地传递给可信预言机的支持会是制约竞猜行业更大发展的瓶颈。</p>
+<h2 id="去中心化金融"><a href="#去中心化金融" class="headerlink" title="去中心化金融"></a><strong>去中心化金融</strong></h2><p>价值互通，价值融合是区块链非常重要的点，去中心化金融（Defi）最重要的作用即为</p>
+<p>DCEP将作为重要的安全、信用高的稳定币，对目前的数字货币稳定币体系产生重要的冲击，并且会为以稳定币作为基础的区块链金融产生具大影响，将可能进一步推动去中心化金融（Defi）的发展。</p>
+<p>在Defi的“三驾马车”包括：去中心化交易所，借贷产品和稳定币项目均需要稳定可靠的数据源高效地提交给链上。</p>
+<p>困局和风险</p>
+<p>悉尼时间 2019 年 6 月 25 日凌晨 3 点，Synthetix 遭遇 oracle 攻击，损失超过 3700 万枚sETH</p>
+<p>Synthetix 使用预言机仅向2个商业 API 获取外汇，商品和加密货币的价格，整合过后作为最终结果，KRW的价格仅由两个API提供，其中一个API间歇性地汇报错误的KRW价格（为正常价格的1000倍），因此导致预言机从两个API获得价格数据之后取均值将<strong>得到的错误价格</strong>上报给平台的汇率合约。</p>
+<p>现在市场上去中心化预言机项目为主，最具代表性的几个有Chainlink和DOS Network。两个项目各有优劣，用不同的方式解决预言机问题。</p>
+<p>ChainLink和Oraclized选择的则是选择权威数据源+可信数据</p>
+<p>然而自从2018年扎克伯格在Facebook为5000万Facebook用户信息卖给了数据分析公司Cambridge Analytical之后，我们对大公司的制约仅能靠声誉和内部揭发者的举报(whistle-blowing)。</p>
+<p>Facebook的声誉损失，同样给Libra在美国听证会上的信誉造成损失</p>
+<p>目前的困局是数据即价值，中心化平台为了股价和很好的财务报表甚至ulterior motives，会或多或少有做作恶换取利润的动机。</p>
+<p>如何将数据的价值<strong>更好的，更智慧的</strong>分配用户，数据提供方和风控方和其他stakeholders，是我们要思考的问题。</p>
+<p>BOS Oracle系统应运而生</p>
+<p>中心化会带来作恶的动机，去中心化会有设计的困难和效率，如何合理的激励和惩戒预言机系统中的每一个参与方，会是一个很值得思考的问题</p>
+<p>BOSCore使用<strong>正向激励，博弈完备</strong>的模型平衡好效率和市场关系的改变。</p>
+<p>并提供四种不同的传递数据的方式，将数据上链</p>
+<p>\1. 数据提者先行写入数据到链上，使用者读取</p>
+<p>\2. 数据提供者监听调用事件，链上主动推送数据到使用者</p>
+<p>\3. 数据提供者监听调用事件，链下主动推送数据到使用者</p>
+<p>\4. 链下完成数据交互，签名保证数据可靠</p>
+<p>如何设计预言机生态中的参与方，如何制约，如何激励，如何做好风险防控，如何确保数据可信等思考，后面的内容会展开和大家进行分享。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/management/avoid-gratuitous-try-strengthen-cardinal-neurons/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -368,7 +738,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/Information Theory/information-theory/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/securities/新加坡MAS三大项目介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -387,7 +757,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/01/Information Theory/information-theory/" itemprop="url">information_theory</a></h1>
+                <a class="post-title-link" href="/2019/06/01/securities/新加坡MAS三大项目介绍/" itemprop="url">新加坡MAS三大项目介绍</a></h1>
         
 
         <div class="post-meta">
@@ -409,6 +779,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Law-Regulation/" itemprop="url" rel="index">
+                    <span itemprop="name">Law & Regulation</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -439,8 +831,22 @@
       
         
           
-            <p><img src="/2019/06/01/Information Theory/information-theory/image-20190601004839772.png" alt="image-20190601004839772"></p>
-<p><a href="https://www.khanacademy.org/computing/computer-science/informationtheory/info-theory/v/intro-information-theory" target="_blank" rel="noopener">https://www.khanacademy.org/computing/computer-science/informationtheory/info-theory/v/intro-information-theory</a></p>
+            <h3 id="项目一：Project-Ubin"><a href="#项目一：Project-Ubin" class="headerlink" title="项目一：Project Ubin"></a>项目一：Project Ubin</h3><p>conduct inter-bank payments using Blockchain technology</p>
+<p>clearing and settlement</p>
+<p>清算体系，在银行间跨行结算和跨境结算方面</p>
+<ol>
+<li>Tokenised SGD</li>
+<li>Re-imagining </li>
+<li>Delivery versus Payment (DvP)</li>
+<li>Cross-border Payment</li>
+<li><strong>Enabling Broad Ecosystem Collaboration</strong></li>
+</ol>
+<p><a href="https://capbridge.sg/project-endor-blockchain-based-securities-exchange-final-report/" target="_blank" rel="noopener">https://capbridge.sg/project-endor-blockchain-based-securities-exchange-final-report/</a></p>
+<h3 id="项目二：Project-Endor-Blockchain-Based-Securities-Exchange-Final-Report"><a href="#项目二：Project-Endor-Blockchain-Based-Securities-Exchange-Final-Report" class="headerlink" title="项目二：Project Endor: Blockchain-Based Securities Exchange Final Report"></a>项目二：Project Endor: Blockchain-Based Securities Exchange Final Report</h3><p>帮助小企业发币</p>
+<p>Project Endor is designed to enable secondary <strong>trading of private company securities</strong> in a centralized, transparent, and efficient manner. It provides a new way to achieve partial liquidity that is more cost effective, allows smaller offer sizes and with “light touch” listing rules. At the same time, it enables Accredited Investors the ability to access and participate in <strong>promising private SMEs</strong>. </p>
+<p>regulatory-compliant, private exchange with tokenized securities built on the public Ethereum network. </p>
+<h3 id="项目三：和香港金融管理局的合作-GTCN"><a href="#项目三：和香港金融管理局的合作-GTCN" class="headerlink" title="项目三：和香港金融管理局的合作 GTCN"></a>项目三：和香港金融管理局的合作 GTCN</h3><p>将贸易和金融代币化</p>
+<p><a href="https://www.mas.gov.sg/news/media-releases/2017/singapore-and-hong-kong-launch-a-joint-project-on-cross-border-trade-and-trade-finance-platform" target="_blank" rel="noopener">https://www.mas.gov.sg/news/media-releases/2017/singapore-and-hong-kong-launch-a-joint-project-on-cross-border-trade-and-trade-finance-platform</a></p>
 
           
         
@@ -489,7 +895,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/EOS/BOS Oracle/BOS Oracle 1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/securities/香港关于牌照的分析(WIP)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -508,7 +914,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/01/EOS/BOS Oracle/BOS Oracle 1/" itemprop="url">BOS Oracle (一) 解决区块链落地发展的困局</a></h1>
+                <a class="post-title-link" href="/2019/06/01/securities/香港关于牌照的分析(WIP)/" itemprop="url">香港关于牌照的分析(WIP)</a></h1>
         
 
         <div class="post-meta">
@@ -543,8 +949,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/预言机/" itemprop="url" rel="index">
-                    <span itemprop="name">预言机</span>
+                  <a href="/categories/Law-Regulation/" itemprop="url" rel="index">
+                    <span itemprop="name">Law & Regulation</span>
                   </a>
                 </span>
 
@@ -582,41 +988,31 @@
       
         
           
-            <h1 id="预言机是什么"><a href="#预言机是什么" class="headerlink" title="预言机是什么"></a>预言机是什么</h1><p>徐忠博士在央行金融研究所发布的论文：<a href="http://www.chinamfi.net/upload/link/1811/f084866.pdf" target="_blank" rel="noopener">《区块链能做什么、不能做什么?》</a>：</p>
-<p>区块链外信息写入区块链内的机制，一般被称为预言机 (oracle mechanism)</p>
-<p>简而言之，预言机就是区块链与现实世界进行数据交互的桥梁。</p>
-<p>DAPP如果是App的话，预言机就是媒介让数据可信的方式做到App和现实世界的沟通，笔者会用三期和大家分享技术和应用的心得：</p>
-<p>为什么需要渠道可信？</p>
-<p>如何保障这个数据渠道的<strong>可信</strong>？</p>
-<p>可信数据渠道如何应用？</p>
-<h1 id="预言机是的用途"><a href="#预言机是的用途" class="headerlink" title="预言机是的用途"></a>预言机是的用途</h1><p>DAPP如果是App的话，预言机就是媒介让数据可信的方式做到App和现实世界的沟通，在大数据保险，体育竞猜，和去中心化金融等方面的大规模落地等都会有广阔需求。</p>
-<h2 id="大数据和保险保险"><a href="#大数据和保险保险" class="headerlink" title="大数据和保险保险"></a><strong>大数据和保险保险</strong></h2><p>在现行的保险理赔过程中，常出现拒赔概率高的情况。规则的制定和赔付的执行主要由保险公司制定，颁布和修改，缺乏保证第三方来保证公平性。加之，赔付时保险公司占据的强势地位，以及一些不可避免的主观因素。导致的“投保容易，理赔难”。 利用区块链的大数据保险势在必行，通过区块链智能合约，提高核保进程、管理效率并且能够自动赔付，有效减少保险公司不合规拒赔/拒偿的操作空间和机会， 重塑保险公司和消费者的信任。如何让claim信息高效，准确传递给合约，及时发放insurance premium。</p>
-<h2 id="体育和电竞竞猜行业"><a href="#体育和电竞竞猜行业" class="headerlink" title="体育和电竞竞猜行业"></a><strong>体育和电竞竞猜行业</strong></h2><p>Sports betting currently accounts for upwards of <strong>40% of global gambling revenue</strong>around the world, which is <strong>more than any other section</strong> (inclusive of lotteries, casinos, poker, and other forms of gaming.). the CAGR (Compounded Annual Growth Rate) is expected to increase by a whopping 8.62% from 2018-2022.</p>
-<p>在2018年到2022年之间，体育竞猜会有8.62%的增长</p>
-<p>对于电竞行业来说，每年的增长率为13.5%，预计在2020年会达到129百亿美金</p>
-<p><a href="https://www.scmp.com/sport/other-sport/article/2182341/e-sports-online-betting-hit-us129-billion-2020-fastest-growing" target="_blank" rel="noopener">South China Morning Post E-sports online betting to hit US$12.9 billion in 2020 – fastest-growing trend in global sports gambling, says research report</a></p>
-<p>体育竞猜行业的结果需要通过可信的方式，触发智能合约，发起ACTION，如何保证比赛结果，真实有效地传递给可信预言机的支持会是制约竞猜行业更大发展的瓶颈。</p>
-<h2 id="去中心化金融"><a href="#去中心化金融" class="headerlink" title="去中心化金融"></a><strong>去中心化金融</strong></h2><p>价值互通，价值融合是区块链非常重要的点，去中心化金融（Defi）最重要的作用即为</p>
-<p>DCEP将作为重要的安全、信用高的稳定币，对目前的数字货币稳定币体系产生重要的冲击，并且会为以稳定币作为基础的区块链金融产生具大影响，将可能进一步推动去中心化金融（Defi）的发展。</p>
-<p>在Defi的“三驾马车”包括：去中心化交易所，借贷产品和稳定币项目均需要稳定可靠的数据源高效地提交给链上。</p>
-<p>困局和风险</p>
-<p>悉尼时间 2019 年 6 月 25 日凌晨 3 点，Synthetix 遭遇 oracle 攻击，损失超过 3700 万枚sETH</p>
-<p>Synthetix 使用预言机仅向2个商业 API 获取外汇，商品和加密货币的价格，整合过后作为最终结果，KRW的价格仅由两个API提供，其中一个API间歇性地汇报错误的KRW价格（为正常价格的1000倍），因此导致预言机从两个API获得价格数据之后取均值将<strong>得到的错误价格</strong>上报给平台的汇率合约。</p>
-<p>现在市场上去中心化预言机项目为主，最具代表性的几个有Chainlink和DOS Network。两个项目各有优劣，用不同的方式解决预言机问题。</p>
-<p>ChainLink和Oraclized选择的则是选择权威数据源+可信数据</p>
-<p>然而自从2018年扎克伯格在Facebook为5000万Facebook用户信息卖给了数据分析公司Cambridge Analytical之后，我们对大公司的制约仅能靠声誉和内部揭发者的举报(whistle-blowing)。</p>
-<p>Facebook的声誉损失，同样给Libra在美国听证会上的信誉造成损失</p>
-<p>目前的困局是数据即价值，中心化平台为了股价和很好的财务报表甚至ulterior motives，会或多或少有做作恶换取利润的动机。</p>
-<p>如何将数据的价值<strong>更好的，更智慧的</strong>分配用户，数据提供方和风控方和其他stakeholders，是我们要思考的问题。</p>
-<p>BOS Oracle系统应运而生</p>
-<p>中心化会带来作恶的动机，去中心化会有设计的困难和效率，如何合理的激励和惩戒预言机系统中的每一个参与方，会是一个很值得思考的问题</p>
-<p>BOSCore使用<strong>正向激励，博弈完备</strong>的模型平衡好效率和市场关系的改变。</p>
-<p>并提供四种不同的传递数据的方式，将数据上链</p>
-<p>\1. 数据提者先行写入数据到链上，使用者读取</p>
-<p>\2. 数据提供者监听调用事件，链上主动推送数据到使用者</p>
-<p>\3. 数据提供者监听调用事件，链下主动推送数据到使用者</p>
-<p>\4. 链下完成数据交互，签名保证数据可靠</p>
-<p>如何设计预言机生态中的参与方，如何制约，如何激励，如何做好风险防控，如何确保数据可信等思考，后面的内容会展开和大家进行分享。</p>
+            <p>参考文章：Position Paper：<strong>Regulation of virtual asset trading platforms</strong></p>
+<p><a href="https://www.sfc.hk/web/EN/files/ER/PDF/20191106%20Position%20Paper%20and%20Appendix%201%20to%20Position%20Paper%20(Eng).pdf" target="_blank" rel="noopener">https://www.sfc.hk/web/EN/files/ER/PDF/20191106%20Position%20Paper%20and%20Appendix%201%20to%20Position%20Paper%20(Eng).pdf</a></p>
+<p><strong>PART III – FRAMEWORK FOR THE REGULATION OF VIRTUAL ASSET TRADING<br>PLATFORMS</strong></p>
+<p>Under the regulatory framework, a platform should operate a centralised online trading platform in Hong Kong and offer trading of at least one security token on its platform. The platform operator would then fall within the jurisdiction of the SFC and <strong>require a licence for Type 1 (dealing in securities)</strong> and <strong>Type 7 (providing ATS)</strong> regulated activities. Subject to meeting other licensing requirements including the fit and proper criteria, the SFC may then grant a licence to a qualified platform operator to carry on its virtual asset trading business. </p>
+<p><strong>下面参考sfc关于regulatory type的内容：</strong></p>
+<p><a href="https://www.sfc.hk/web/EN/regulatory-functions/intermediaries/licensing/guide-to-licence-application/regulated-activities.html" target="_blank" rel="noopener">https://www.sfc.hk/web/EN/regulatory-functions/intermediaries/licensing/guide-to-licence-application/regulated-activities.html</a></p>
+<p>Type 1 </p>
+<p>Dealing in securities：</p>
+<ul>
+<li>Trading /broking stock options for clients</li>
+<li>Trading bonds for clients</li>
+<li>Buying / selling mutual funds and unit trusts for clients</li>
+<li>Placing and underwriting of securities </li>
+</ul>
+<p>Type 7</p>
+<p>Providing automated trading services </p>
+<ul>
+<li>Operating an electronic trading platform for matching client orders </li>
+</ul>
+<p>1 号证券交易牌：HK$ 800万 ~ 1500万</p>
+<p>7 号证券</p>
+<p><img src="https://pic4.zhimg.com/80/v2-373324aaf4ec1c7f568220460bb66a57_hd.jpg" alt="img"></p>
+<p>延伸阅读：</p>
+<p>证券和期货监视委员会</p>
+<p><a href="https://www.sfc.hk/web/EN/files/IS/publications/VA_Portfolio_Managers_Terms_and_Conditions_(EN).pdf" target="_blank" rel="noopener">https://www.sfc.hk/web/EN/files/IS/publications/VA_Portfolio_Managers_Terms_and_Conditions_(EN).pdf</a></p>
 
           
         
@@ -1019,7 +1415,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/EOS/BOS Oracle/BOS Oracle 2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/Information Theory/information-theory/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1038,7 +1434,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/01/EOS/BOS Oracle/BOS Oracle 2/" itemprop="url">BOS Oracle（二）用正向激励的方式提供可信数据</a></h1>
+                <a class="post-title-link" href="/2019/06/01/Information Theory/information-theory/" itemprop="url">information_theory</a></h1>
         
 
         <div class="post-meta">
@@ -1060,28 +1456,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/预言机/" itemprop="url" rel="index">
-                    <span itemprop="name">预言机</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1112,59 +1486,8 @@
       
         
           
-            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>BOS 的预言机（Oracle）希望能够作为区块链与现实世界的数据桥梁。</p>
-<p>中心化预言机服务的设计是基于<strong>可信数据源或者权威数据源</strong>这一假设，这样的假设从理论上来说有很大风险，无法保证这种数据源提供数据的真实性。</p>
-<p>BOS 的预言机系统从构建之初所遵循的原则就是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">不依赖于每一个预言机数据提供者一定会提供真实数据，而是承认其不足进而将其作为博弈的参与方加入到系统中来，以期在博弈中达到整体可信。</span><br></pre></td></tr></table></figure>
-<p>BOS 预言机将会使得区块链的价值从其货币属性延伸到了<strong>交易和规则</strong>的构建上，这种延伸将会解决或改进许多现实世界的信任问题，从而扩大区块链的应用边界，并最终让区块链技术可以在交易转账以外场景落地。</p>
-<h1 id="参与者博弈完备"><a href="#参与者博弈完备" class="headerlink" title="参与者博弈完备"></a>参与者博弈完备</h1><p><strong>数据提供方：</strong>提供数据，从数据使用者中获取收益，需要抵押押金作为风控的基础</p>
-<p><strong>数据使用者：</strong>和提供方约定收益，按照约定支付费用</p>
-<p><strong>预言机合约：</strong>用于记录数据提供方和使用者所约定的协议，并提供数据处理和穿透。</p>
-<p><strong>仲裁员：</strong>当数据提供方和数据使用者出现争议和提出申诉时，多轮多个仲裁员参与决策，注册并且需要boswps.io竞选，需要抵押押金作为风控的基础</p>
-<p>系统会对最终判定的作恶者进行惩罚。整个系统会形成“数据提供者”、“数据使用者”、“仲裁员”三方的博弈平衡，而整个博弈过程和规则制定可以保证公正是极大概率的事件。</p>
-<h1 id="正向激励模型"><a href="#正向激励模型" class="headerlink" title="正向激励模型"></a>正向激励模型</h1><p><strong>场景一：</strong></p>
-<p>\1.    DApp方为了给用户提供可信数据并作出判断，获取问题需求注册服务，并给该服务所需的价格，和所需的抵押金。</p>
-<p>\2.  数据提供方提供稳定可靠的服务，使用抵押金作为保证，收取高昂的费用作为维护成本，并提供收益。</p>
-<p><strong>场景二：</strong></p>
-<p>DApp方提供体育比赛数据，但为了证明DApp方自身不会作假，自身作为提供者和<strong>同时作为使用者</strong>进行注册，当DApp用户有举报问题时进行扣款和抵押。</p>
-<p>总之系统的规则对于理性的参与者来说是静态的可预见的，因而诚实公正地进行参与才是其优势策略，对于非理性的参与者系统也能够以极大概率予以惩罚，从而使得整个预言机服务将会正向、健康、高效的运行。</p>
-<p>下面我们列出四种通过正向激励，将数据通过可信方式进行数据通信：</p>
-<h1 id="1-直接写入数据库"><a href="#1-直接写入数据库" class="headerlink" title="1. 直接写入数据库"></a>1. 直接写入数据库</h1><p><img src="/2019/06/01/EOS/BOS Oracle/BOS Oracle 2/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
-<h4 id="数据提者先行写入数据到链上，使用者读取"><a href="#数据提者先行写入数据到链上，使用者读取" class="headerlink" title="数据提者先行写入数据到链上，使用者读取"></a>数据提者先行写入数据到链上，使用者读取</h4><p><strong>应用场景：</strong></p>
-<p>比较适应非标准化的服务，包括特殊证据格式的服务，预言机合约不方便进行穿透的场景</p>
-<p><strong>服务特点：</strong></p>
-<p>标准化服务，服务便于注册，以确定性数据和常规化的非确定性数据为主，在提供方pushdata的过程中，经过oracle穿透，对使用和消费双方简单方便</p>
-<h1 id="2-监听-穿透oracle合约推送"><a href="#2-监听-穿透oracle合约推送" class="headerlink" title="2. 监听+穿透oracle合约推送"></a>2. 监听+穿透oracle合约推送</h1><p><img src="https://mmbiz.qpic.cn/mmbiz_png/ic36Rayaict54e6DpdhkDfPsAHKq2zUiaV8nF3GUgEibicepu4lGsZneSq02JuvR1xChK66bRT10CeLAicIUqZL0m4SQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
-<h4 id="监听调用事件，链上主动推送数据到使用者"><a href="#监听调用事件，链上主动推送数据到使用者" class="headerlink" title="监听调用事件，链上主动推送数据到使用者"></a>监听调用事件，链上主动推送数据到使用者</h4><p><strong>应用场景：</strong></p>
-<p>比较适应非标准化的服务，包括特殊证据格式的服务，预言机合约不方便进行穿透的场景</p>
-<p><strong>服务特点：</strong></p>
-<p>标准化服务，服务便于注册，以确定性数据和常规化的非确定性数据为主，在提供方pushdata的过程中，经过oracle穿透，对使用和消费双方简单方便</p>
-<h1 id="3-监听-直接推送DApp合约"><a href="#3-监听-直接推送DApp合约" class="headerlink" title="3. 监听+直接推送DApp合约"></a>3. 监听+直接推送DApp合约</h1><p><img src="https://mmbiz.qpic.cn/mmbiz_png/ic36Rayaict54e6DpdhkDfPsAHKq2zUiaV8mXs7th2KUaBYydghlKRnNbEm0BMC46LVckv3SHdUUhCzSrBkZpO9lw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
-<h4 id="监听调用事件，链下主动推送给数据使用者"><a href="#监听调用事件，链下主动推送给数据使用者" class="headerlink" title="监听调用事件，链下主动推送给数据使用者"></a>监<strong>听调</strong>用事件，链下主动推送给数据使用者</h4><p>在触发阈值逻辑时，经过预言机合约，将发送有效ACTION和用户交互</p>
-<p><strong>应用场景：</strong></p>
-<p>比较适应非标准化的服务，包括特殊证据格式的服务，预言机合约不方便进行穿透的场景</p>
-<p><strong>服务特点：</strong></p>
-<p>可高度定制化，但需提供方和DApp方进行约定，不经过预言机合约</p>
-<h1 id="4-链下签名交互数据-链上风控博弈"><a href="#4-链下签名交互数据-链上风控博弈" class="headerlink" title="4. 链下签名交互数据+链上风控博弈"></a>4. 链下签名交互数据+链上风控博弈</h1><p>预言机不再监听数据交易和请求，数据提供方和消费者</p>
-<ol>
-<li><p>提前在预言机合约签订交互协议，包括进行仲裁和抵押</p>
-</li>
-<li><p>在链下进行签名，<strong>签名确认</strong>数据提供者发出信息，<strong>确认</strong>数据接受者收到信息</p>
-</li>
-<li><p>在链下进行数据的提供和消费</p>
-</li>
-<li><p>但当触发转账或有效ACTION时通过触发oracle合约的风控机制进行操作</p>
-</li>
-<li><p>当出现纷争时，双方即可根据在Oracle约定好的风控规则，即向oracle.bos合约发起仲裁</p>
-</li>
-</ol>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/ic36Rayaict54e6DpdhkDfPsAHKq2zUiaV8Yh6L0InLoUKBZkic87gbrCzvx2mZFunsj5dicB8m2icJEj2ibwSolFcOGg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
-<p><strong>应用场景：</strong></p>
-<p>数据量非常大，更新太频繁了，链上太复杂，例如深度学习的训练，数据集和，数据无需上链，但通过签名进行数据记录。</p>
-<p><strong>特点：</strong></p>
-<p>可高度定制化，但需提供方和DApp方进行约定，数据交互直接在数据</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>四种不同的数据提供方式，适应不同的场景，现实世界数据具有的<strong>复杂性、不规整性、零散性以及隐私性</strong>。从公开可方便获取的数据（比如天气）到有限制的数据（比如个人征信）都可以成为 BOS 的预言机服务。任何可以被描述并在一定意义上可以被鉴别的数据服务都可通过 BOS 预言机的来提供服务。</p>
-<p>后面我们将展开关于博弈和制约，抵押模型和Demo展示预言机的功能的文章和大家交流讨论。</p>
+            <p><img src="/2019/06/01/Information Theory/information-theory/image-20190601004839772.png" alt="image-20190601004839772"></p>
+<p><a href="https://www.khanacademy.org/computing/computer-science/informationtheory/info-theory/v/intro-information-theory" target="_blank" rel="noopener">https://www.khanacademy.org/computing/computer-science/informationtheory/info-theory/v/intro-information-theory</a></p>
 
           
         
@@ -1345,329 +1668,6 @@
 <p>Appendicular</p>
 <p>Axial </p>
 <p><img src="https://c8.alamy.com/comp/WA6MC6/human-skeleton-system-appendicular-and-axial-anatomy-posterior-view-WA6MC6.jpg" alt></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/securities/香港关于牌照的分析(WIP)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/01/securities/香港关于牌照的分析(WIP)/" itemprop="url">香港关于牌照的分析(WIP)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-01T00:48:31+08:00">
-                2019-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Law-Regulation/" itemprop="url" rel="index">
-                    <span itemprop="name">Law & Regulation</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>参考文章：Position Paper：<strong>Regulation of virtual asset trading platforms</strong></p>
-<p><a href="https://www.sfc.hk/web/EN/files/ER/PDF/20191106%20Position%20Paper%20and%20Appendix%201%20to%20Position%20Paper%20(Eng).pdf" target="_blank" rel="noopener">https://www.sfc.hk/web/EN/files/ER/PDF/20191106%20Position%20Paper%20and%20Appendix%201%20to%20Position%20Paper%20(Eng).pdf</a></p>
-<p><strong>PART III – FRAMEWORK FOR THE REGULATION OF VIRTUAL ASSET TRADING<br>PLATFORMS</strong></p>
-<p>Under the regulatory framework, a platform should operate a centralised online trading platform in Hong Kong and offer trading of at least one security token on its platform. The platform operator would then fall within the jurisdiction of the SFC and <strong>require a licence for Type 1 (dealing in securities)</strong> and <strong>Type 7 (providing ATS)</strong> regulated activities. Subject to meeting other licensing requirements including the fit and proper criteria, the SFC may then grant a licence to a qualified platform operator to carry on its virtual asset trading business. </p>
-<p><strong>下面参考sfc关于regulatory type的内容：</strong></p>
-<p><a href="https://www.sfc.hk/web/EN/regulatory-functions/intermediaries/licensing/guide-to-licence-application/regulated-activities.html" target="_blank" rel="noopener">https://www.sfc.hk/web/EN/regulatory-functions/intermediaries/licensing/guide-to-licence-application/regulated-activities.html</a></p>
-<p>Type 1 </p>
-<p>Dealing in securities：</p>
-<ul>
-<li>Trading /broking stock options for clients</li>
-<li>Trading bonds for clients</li>
-<li>Buying / selling mutual funds and unit trusts for clients</li>
-<li>Placing and underwriting of securities </li>
-</ul>
-<p>Type 7</p>
-<p>Providing automated trading services </p>
-<ul>
-<li>Operating an electronic trading platform for matching client orders </li>
-</ul>
-<p>1 号证券交易牌：HK$ 800万 ~ 1500万</p>
-<p>7 号证券</p>
-<p><img src="https://pic4.zhimg.com/80/v2-373324aaf4ec1c7f568220460bb66a57_hd.jpg" alt="img"></p>
-<p>延伸阅读：</p>
-<p>证券和期货监视委员会</p>
-<p><a href="https://www.sfc.hk/web/EN/files/IS/publications/VA_Portfolio_Managers_Terms_and_Conditions_(EN).pdf" target="_blank" rel="noopener">https://www.sfc.hk/web/EN/files/IS/publications/VA_Portfolio_Managers_Terms_and_Conditions_(EN).pdf</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/securities/新加坡MAS三大项目介绍/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/01/securities/新加坡MAS三大项目介绍/" itemprop="url">新加坡MAS三大项目介绍</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-01T00:48:31+08:00">
-                2019-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Law-Regulation/" itemprop="url" rel="index">
-                    <span itemprop="name">Law & Regulation</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="项目一：Project-Ubin"><a href="#项目一：Project-Ubin" class="headerlink" title="项目一：Project Ubin"></a>项目一：Project Ubin</h3><p>conduct inter-bank payments using Blockchain technology</p>
-<p>clearing and settlement</p>
-<p>清算体系，在银行间跨行结算和跨境结算方面</p>
-<ol>
-<li>Tokenised SGD</li>
-<li>Re-imagining </li>
-<li>Delivery versus Payment (DvP)</li>
-<li>Cross-border Payment</li>
-<li><strong>Enabling Broad Ecosystem Collaboration</strong></li>
-</ol>
-<p><a href="https://capbridge.sg/project-endor-blockchain-based-securities-exchange-final-report/" target="_blank" rel="noopener">https://capbridge.sg/project-endor-blockchain-based-securities-exchange-final-report/</a></p>
-<h3 id="项目二：Project-Endor-Blockchain-Based-Securities-Exchange-Final-Report"><a href="#项目二：Project-Endor-Blockchain-Based-Securities-Exchange-Final-Report" class="headerlink" title="项目二：Project Endor: Blockchain-Based Securities Exchange Final Report"></a>项目二：Project Endor: Blockchain-Based Securities Exchange Final Report</h3><p>帮助小企业发币</p>
-<p>Project Endor is designed to enable secondary <strong>trading of private company securities</strong> in a centralized, transparent, and efficient manner. It provides a new way to achieve partial liquidity that is more cost effective, allows smaller offer sizes and with “light touch” listing rules. At the same time, it enables Accredited Investors the ability to access and participate in <strong>promising private SMEs</strong>. </p>
-<p>regulatory-compliant, private exchange with tokenized securities built on the public Ethereum network. </p>
-<h3 id="项目三：和香港金融管理局的合作-GTCN"><a href="#项目三：和香港金融管理局的合作-GTCN" class="headerlink" title="项目三：和香港金融管理局的合作 GTCN"></a>项目三：和香港金融管理局的合作 GTCN</h3><p>将贸易和金融代币化</p>
-<p><a href="https://www.mas.gov.sg/news/media-releases/2017/singapore-and-hong-kong-launch-a-joint-project-on-cross-border-trade-and-trade-finance-platform" target="_blank" rel="noopener">https://www.mas.gov.sg/news/media-releases/2017/singapore-and-hong-kong-launch-a-joint-project-on-cross-border-trade-and-trade-finance-platform</a></p>
 
           
         

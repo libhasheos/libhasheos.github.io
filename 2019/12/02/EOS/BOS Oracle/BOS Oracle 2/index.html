@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="oracle,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="概述BOS 的预言机（Oracle）希望能够作为区块链与现实世界的数据桥梁。 中心化预言机服务的设计是基于可信数据源或者权威数据源这一假设，这样的假设从理论上来说有很大风险，无法保证这种数据源提供数据的真实性。 BOS 的预言机系统从构建之初所遵循的原则就是： 12不依赖于每一个预言机数据提供者一定会提供真实数据，而是承认其不足进而将其作为博弈的参与方加入到系统中来，以期在博弈中达到整体可信。 B">
+<meta name="keywords" content="oracle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BOS Oracle（二）用正向激励的方式提供可信数据">
+<meta property="og:url" content="http://yoursite.com/2019/12/02/EOS/BOS Oracle/BOS Oracle 2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="概述BOS 的预言机（Oracle）希望能够作为区块链与现实世界的数据桥梁。 中心化预言机服务的设计是基于可信数据源或者权威数据源这一假设，这样的假设从理论上来说有很大风险，无法保证这种数据源提供数据的真实性。 BOS 的预言机系统从构建之初所遵循的原则就是： 12不依赖于每一个预言机数据提供者一定会提供真实数据，而是承认其不足进而将其作为博弈的参与方加入到系统中来，以期在博弈中达到整体可信。 B">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/12/02/EOS/BOS%20Oracle/BOS%20Oracle%202/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/ic36Rayaict54e6DpdhkDfPsAHKq2zUiaV8nF3GUgEibicepu4lGsZneSq02JuvR1xChK66bRT10CeLAicIUqZL0m4SQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/ic36Rayaict54e6DpdhkDfPsAHKq2zUiaV8mXs7th2KUaBYydghlKRnNbEm0BMC46LVckv3SHdUUhCzSrBkZpO9lw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/ic36Rayaict54e6DpdhkDfPsAHKq2zUiaV8Yh6L0InLoUKBZkic87gbrCzvx2mZFunsj5dicB8m2icJEj2ibwSolFcOGg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:updated_time" content="2019-12-02T06:57:52.237Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BOS Oracle（二）用正向激励的方式提供可信数据">
+<meta name="twitter:description" content="概述BOS 的预言机（Oracle）希望能够作为区块链与现实世界的数据桥梁。 中心化预言机服务的设计是基于可信数据源或者权威数据源这一假设，这样的假设从理论上来说有很大风险，无法保证这种数据源提供数据的真实性。 BOS 的预言机系统从构建之初所遵循的原则就是： 12不依赖于每一个预言机数据提供者一定会提供真实数据，而是承认其不足进而将其作为博弈的参与方加入到系统中来，以期在博弈中达到整体可信。 B">
+<meta name="twitter:image" content="http://yoursite.com/2019/12/02/EOS/BOS%20Oracle/BOS%20Oracle%202/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/02/EOS/BOS Oracle/BOS Oracle 2/">
+
+
+
+
+
+  <title>BOS Oracle（二）用正向激励的方式提供可信数据 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/02/EOS/BOS Oracle/BOS Oracle 2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BOS Oracle（二）用正向激励的方式提供可信数据</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-02T15:00:31+08:00">
+                2019-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/预言机/" itemprop="url" rel="index">
+                    <span itemprop="name">预言机</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>BOS 的预言机（Oracle）希望能够作为区块链与现实世界的数据桥梁。</p>
+<p>中心化预言机服务的设计是基于<strong>可信数据源或者权威数据源</strong>这一假设，这样的假设从理论上来说有很大风险，无法保证这种数据源提供数据的真实性。</p>
+<p>BOS 的预言机系统从构建之初所遵循的原则就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">不依赖于每一个预言机数据提供者一定会提供真实数据，而是承认其不足进而将其作为博弈的参与方加入到系统中来，以期在博弈中达到整体可信。</span><br></pre></td></tr></table></figure>
+<p>BOS 预言机将会使得区块链的价值从其货币属性延伸到了<strong>交易和规则</strong>的构建上，这种延伸将会解决或改进许多现实世界的信任问题，从而扩大区块链的应用边界，并最终让区块链技术可以在交易转账以外场景落地。</p>
+<h1 id="参与者博弈完备"><a href="#参与者博弈完备" class="headerlink" title="参与者博弈完备"></a>参与者博弈完备</h1><p><strong>数据提供方：</strong>提供数据，从数据使用者中获取收益，需要抵押押金作为风控的基础</p>
+<p><strong>数据使用者：</strong>和提供方约定收益，按照约定支付费用</p>
+<p><strong>预言机合约：</strong>用于记录数据提供方和使用者所约定的协议，并提供数据处理和穿透。</p>
+<p><strong>仲裁员：</strong>当数据提供方和数据使用者出现争议和提出申诉时，多轮多个仲裁员参与决策，注册并且需要boswps.io竞选，需要抵押押金作为风控的基础</p>
+<p>系统会对最终判定的作恶者进行惩罚。整个系统会形成“数据提供者”、“数据使用者”、“仲裁员”三方的博弈平衡，而整个博弈过程和规则制定可以保证公正是极大概率的事件。</p>
+<h1 id="正向激励模型"><a href="#正向激励模型" class="headerlink" title="正向激励模型"></a>正向激励模型</h1><p><strong>场景一：</strong></p>
+<p>\1.    DApp方为了给用户提供可信数据并作出判断，获取问题需求注册服务，并给该服务所需的价格，和所需的抵押金。</p>
+<p>\2.  数据提供方提供稳定可靠的服务，使用抵押金作为保证，收取高昂的费用作为维护成本，并提供收益。</p>
+<p><strong>场景二：</strong></p>
+<p>DApp方提供体育比赛数据，但为了证明DApp方自身不会作假，自身作为提供者和<strong>同时作为使用者</strong>进行注册，当DApp用户有举报问题时进行扣款和抵押。</p>
+<p>总之系统的规则对于理性的参与者来说是静态的可预见的，因而诚实公正地进行参与才是其优势策略，对于非理性的参与者系统也能够以极大概率予以惩罚，从而使得整个预言机服务将会正向、健康、高效的运行。</p>
+<p>下面我们列出四种通过正向激励，将数据通过可信方式进行数据通信：</p>
+<h1 id="1-直接写入数据库"><a href="#1-直接写入数据库" class="headerlink" title="1. 直接写入数据库"></a>1. 直接写入数据库</h1><p><img src="/2019/12/02/EOS/BOS Oracle/BOS Oracle 2/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p>
+<h4 id="数据提者先行写入数据到链上，使用者读取"><a href="#数据提者先行写入数据到链上，使用者读取" class="headerlink" title="数据提者先行写入数据到链上，使用者读取"></a>数据提者先行写入数据到链上，使用者读取</h4><p><strong>应用场景：</strong></p>
+<p>比较适应非标准化的服务，包括特殊证据格式的服务，预言机合约不方便进行穿透的场景</p>
+<p><strong>服务特点：</strong></p>
+<p>标准化服务，服务便于注册，以确定性数据和常规化的非确定性数据为主，在提供方pushdata的过程中，经过oracle穿透，对使用和消费双方简单方便</p>
+<h1 id="2-监听-穿透oracle合约推送"><a href="#2-监听-穿透oracle合约推送" class="headerlink" title="2. 监听+穿透oracle合约推送"></a>2. 监听+穿透oracle合约推送</h1><p><img src="https://mmbiz.qpic.cn/mmbiz_png/ic36Rayaict54e6DpdhkDfPsAHKq2zUiaV8nF3GUgEibicepu4lGsZneSq02JuvR1xChK66bRT10CeLAicIUqZL0m4SQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<h4 id="监听调用事件，链上主动推送数据到使用者"><a href="#监听调用事件，链上主动推送数据到使用者" class="headerlink" title="监听调用事件，链上主动推送数据到使用者"></a>监听调用事件，链上主动推送数据到使用者</h4><p><strong>应用场景：</strong></p>
+<p>比较适应非标准化的服务，包括特殊证据格式的服务，预言机合约不方便进行穿透的场景</p>
+<p><strong>服务特点：</strong></p>
+<p>标准化服务，服务便于注册，以确定性数据和常规化的非确定性数据为主，在提供方pushdata的过程中，经过oracle穿透，对使用和消费双方简单方便</p>
+<h1 id="3-监听-直接推送DApp合约"><a href="#3-监听-直接推送DApp合约" class="headerlink" title="3. 监听+直接推送DApp合约"></a>3. 监听+直接推送DApp合约</h1><p><img src="https://mmbiz.qpic.cn/mmbiz_png/ic36Rayaict54e6DpdhkDfPsAHKq2zUiaV8mXs7th2KUaBYydghlKRnNbEm0BMC46LVckv3SHdUUhCzSrBkZpO9lw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<h4 id="监听调用事件，链下主动推送给数据使用者"><a href="#监听调用事件，链下主动推送给数据使用者" class="headerlink" title="监听调用事件，链下主动推送给数据使用者"></a>监<strong>听调</strong>用事件，链下主动推送给数据使用者</h4><p>在触发阈值逻辑时，经过预言机合约，将发送有效ACTION和用户交互</p>
+<p><strong>应用场景：</strong></p>
+<p>比较适应非标准化的服务，包括特殊证据格式的服务，预言机合约不方便进行穿透的场景</p>
+<p><strong>服务特点：</strong></p>
+<p>可高度定制化，但需提供方和DApp方进行约定，不经过预言机合约</p>
+<h1 id="4-链下签名交互数据-链上风控博弈"><a href="#4-链下签名交互数据-链上风控博弈" class="headerlink" title="4. 链下签名交互数据+链上风控博弈"></a>4. 链下签名交互数据+链上风控博弈</h1><p>预言机不再监听数据交易和请求，数据提供方和消费者</p>
+<ol>
+<li><p>提前在预言机合约签订交互协议，包括进行仲裁和抵押</p>
+</li>
+<li><p>在链下进行签名，<strong>签名确认</strong>数据提供者发出信息，<strong>确认</strong>数据接受者收到信息</p>
+</li>
+<li><p>在链下进行数据的提供和消费</p>
+</li>
+<li><p>但当触发转账或有效ACTION时通过触发oracle合约的风控机制进行操作</p>
+</li>
+<li><p>当出现纷争时，双方即可根据在Oracle约定好的风控规则，即向oracle.bos合约发起仲裁</p>
+</li>
+</ol>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/ic36Rayaict54e6DpdhkDfPsAHKq2zUiaV8Yh6L0InLoUKBZkic87gbrCzvx2mZFunsj5dicB8m2icJEj2ibwSolFcOGg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<p><strong>应用场景：</strong></p>
+<p>数据量非常大，更新太频繁了，链上太复杂，例如深度学习的训练，数据集和，数据无需上链，但通过签名进行数据记录。</p>
+<p><strong>特点：</strong></p>
+<p>可高度定制化，但需提供方和DApp方进行约定，数据交互直接在数据</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>四种不同的数据提供方式，适应不同的场景，现实世界数据具有的<strong>复杂性、不规整性、零散性以及隐私性</strong>。从公开可方便获取的数据（比如天气）到有限制的数据（比如个人征信）都可以成为 BOS 的预言机服务。任何可以被描述并在一定意义上可以被鉴别的数据服务都可通过 BOS 预言机的来提供服务。</p>
+<p>后面我们将展开关于博弈和制约，抵押模型和Demo展示预言机的功能的文章和大家交流讨论。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/oracle/" rel="tag"># oracle</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/02/EOS/BOS Oracle/BOS Oracle 1/" rel="next" title="BOS Oracle (一) 解决区块链落地发展的困局">
+                <i class="fa fa-chevron-left"></i> BOS Oracle (一) 解决区块链落地发展的困局
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参与者博弈完备"><span class="nav-number">2.</span> <span class="nav-text">参与者博弈完备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正向激励模型"><span class="nav-number">3.</span> <span class="nav-text">正向激励模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-直接写入数据库"><span class="nav-number">4.</span> <span class="nav-text">1. 直接写入数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据提者先行写入数据到链上，使用者读取"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">数据提者先行写入数据到链上，使用者读取</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#2-监听-穿透oracle合约推送"><span class="nav-number">5.</span> <span class="nav-text">2. 监听+穿透oracle合约推送</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#监听调用事件，链上主动推送数据到使用者"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">监听调用事件，链上主动推送数据到使用者</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-监听-直接推送DApp合约"><span class="nav-number">6.</span> <span class="nav-text">3. 监听+直接推送DApp合约</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#监听调用事件，链下主动推送给数据使用者"><span class="nav-number">6.0.0.1.</span> <span class="nav-text">监听调用事件，链下主动推送给数据使用者</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-链下签名交互数据-链上风控博弈"><span class="nav-number">7.</span> <span class="nav-text">4. 链下签名交互数据+链上风控博弈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
